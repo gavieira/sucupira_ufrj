@@ -5,3 +5,4 @@ capes_csv_files/
 ufrj_data/
 sucupira_painel/
 analises_exploratorias.ipynb
+.env
