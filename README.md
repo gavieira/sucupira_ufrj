@@ -8,6 +8,20 @@ Os dados processados são posteriormente utilizados para popular o banco de dado
 
 ---
 
+## 🗂️ Modelagem dos Dados
+
+O diagrama abaixo representa o schema relacional que este pipeline visa alimentar. Em azul, as entidades centrais (fato); em cinza, as tabelas de dimensão/lookup associadas.
+
+<img src="assets/sucupira_schema.png" alt="Diagrama ER do schema Sucupira" width="800">
+
+Por ter sido desenhado especificamente para alimentar o painel da UFRJ, o schema apresenta algumas limitações de escopo, que devem ser levadas em conta antes de reutilizá-lo ou adaptá-lo para outros contextos:
+
+- **Instituições não são modeladas como entidade própria**: como o pipeline atende a uma única instituição, não há uma tabela `IES` — os dados já são implicitamente filtrados para a UFRJ antes de chegar ao banco. Uma generalização para múltiplas instituições exigiria adicionar essa dimensão e associá-la a `sucupira_programa`.
+- **Projetos de pesquisa e financiadores não são modelados**: o schema cobre apenas as dimensões de programas, discentes, docentes e produção intelectual, não contemplando as informações de projetos de pesquisa e seus financiadores/agências de fomento disponibilizadas pela CAPES.
+- **Produção intelectual modelada apenas parcialmente**: `sucupira_producao` cobre somente artigos publicados em periódicos, não contemplando os demais tipos/subtipos de produção (técnica, artística, trabalhos de conclusão, etc.) disponíveis nos dados abertos da CAPES.
+
+---
+
 ## Definição de gênero a partir do primeiro nome:
 
 Arquivo json com o mapeamento obtido a partir do arquivo 'grupos.csv' do dataset 'Gênero dos Nomes' do projeto [Brasil IO](https://brasil.io/dataset/genero-nomes/grupos/). Licença:  [Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/). 
